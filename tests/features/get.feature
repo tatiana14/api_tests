@@ -9,6 +9,7 @@ Feature: Get close-approach data
     Then the response status code is "200"
     And response contains only <des> objects
     And response contains only data where approach distance is lower than <dist_max>
+    And all returned data have date between <date_min> and <date_max>
     Examples:
       | des | date_min | date_max | dist_max |
       | 433 | 1900-01-01 | 2100-01-01 | 0.2 |
