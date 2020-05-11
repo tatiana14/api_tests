@@ -7,7 +7,7 @@ Folder 'target' containing report.html will be created in current dir.
 For other systems like MacOS two first commands should also work,
 and the report might be opened from target folder manually or with corresponding command. 
 
-##Solution description.##
+## Solution description. ##
 I used 
 1) pytest-bdd framework for implementing human readable tests
 2) pytest-html for generating html reports
