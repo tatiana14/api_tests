@@ -97,11 +97,14 @@ def verify_date_in_range(date_min, date_max, context):
         assert date >= parser.parse(date_min)
 
 
-@then(parsers.parse('count of returned objects is greater than "{count:d}"'))
-def verify_count_is_greater_than(count, context):
-    assert len(context['parsed_data']) > count
+@then(parsers.parse('count of returned objects is "{comparison_op}" "{count:d}"'))
+def verify_count_is_greater_than(comparison_op, count, context):
+    LOGGER.info(f"Verifying count of returned objects is {comparison_op} {count}")
+    switcher = {'greater than': lambda x, y:  x > y,
+                'equals to': lambda x, y:  x == y,
+                'less than': lambda x, y: x < y,
+                }
+    condition_func = switcher[comparison_op](len(context['parsed_data']), count)
+    assert condition_func == True
 
 
-@then(parsers.parse('count of returned objects is equal to "{count:d}"'))
-def step_impl(count, context):
-    assert len(context['parsed_data']) == count
