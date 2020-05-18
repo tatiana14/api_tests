@@ -77,6 +77,7 @@ def verify_status_code(context, code):
 @then("response contains only <des> objects")
 def verify_des_param(des, context):
     LOGGER.info(f"Verifying des field")
+    assert context['parsed_data']
     for d in context['parsed_data']:
         assert d.des == des
 
@@ -84,6 +85,7 @@ def verify_des_param(des, context):
 @then("response contains only data where approach distance is lower than <dist_max>")
 def verify_dist_max_param(dist_max, context):
     LOGGER.info(f"Verifying dist_max field")
+    assert context['parsed_data']
     for d in context['parsed_data']:
         assert d.dist_max <= dist_max
 
@@ -91,6 +93,7 @@ def verify_dist_max_param(dist_max, context):
 @then("all returned data have date between <date_min> and <date_max>")
 def verify_date_in_range(date_min, date_max, context):
     LOGGER.info(f"Verifying date field")
+    assert context['parsed_data']
     for d in context['parsed_data']:
         date = parser.parse(d.cd)
         assert date <= parser.parse(date_max)
