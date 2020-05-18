@@ -20,6 +20,11 @@ def test_wrong_param_error():
     pass
 
 
+@scenario('../features/get.feature', 'Get by designation empty result test')
+def test_empty_result():
+    pass
+
+
 @pytest.fixture(scope='function')
 def context():
     context = {'payload': {}}
@@ -90,3 +95,13 @@ def verify_date_in_range(date_min, date_max, context):
         date = parser.parse(d.cd)
         assert date <= parser.parse(date_max)
         assert date >= parser.parse(date_min)
+
+
+@then(parsers.parse('count of returned objects is greater than "{count:d}"'))
+def verify_count_is_greater_than(count, context):
+    assert len(context['parsed_data']) > count
+
+
+@then(parsers.parse('count of returned objects is equal to "{count:d}"'))
+def step_impl(count, context):
+    assert len(context['parsed_data']) == count
